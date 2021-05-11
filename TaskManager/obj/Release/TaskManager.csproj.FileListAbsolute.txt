@@ -28,3 +28,13 @@ C:\Users\GEO\Desktop\C#_TREADS\TaskManager\TaskManager\obj\Release\TaskManager.c
 C:\Users\GEO\Desktop\C#_TREADS\TaskManager\TaskManager\obj\Release\TaskManager.csproj.CoreCompileInputs.cache
 C:\Users\GEO\Desktop\C#_TREADS\TaskManager\TaskManager\obj\Release\TaskManager.exe
 C:\Users\GEO\Desktop\C#_TREADS\TaskManager\TaskManager\obj\Release\TaskManager.pdb
+C:\Users\Andrei\source\repos\taskManagerApp\TaskManager\bin\Release\TaskManager.exe.config
+C:\Users\Andrei\source\repos\taskManagerApp\TaskManager\bin\Release\TaskManager.exe
+C:\Users\Andrei\source\repos\taskManagerApp\TaskManager\bin\Release\TaskManager.pdb
+C:\Users\Andrei\source\repos\taskManagerApp\TaskManager\obj\Release\TaskManager.csprojAssemblyReference.cache
+C:\Users\Andrei\source\repos\taskManagerApp\TaskManager\obj\Release\TaskManager.Form1.resources
+C:\Users\Andrei\source\repos\taskManagerApp\TaskManager\obj\Release\TaskManager.Properties.Resources.resources
+C:\Users\Andrei\source\repos\taskManagerApp\TaskManager\obj\Release\TaskManager.csproj.GenerateResource.cache
+C:\Users\Andrei\source\repos\taskManagerApp\TaskManager\obj\Release\TaskManager.csproj.CoreCompileInputs.cache
+C:\Users\Andrei\source\repos\taskManagerApp\TaskManager\obj\Release\TaskManager.exe
+C:\Users\Andrei\source\repos\taskManagerApp\TaskManager\obj\Release\TaskManager.pdb

@@ -10,53 +10,117 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Management;
 using Microsoft.VisualBasic;
+using System.Security.Principal;
+using Microsoft.Win32.SafeHandles;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
+using System.Runtime.ConstrainedExecution;
+using System.Security;
+using System.Threading;
 
 namespace TaskManager
 {
     public partial class Form1 : Form
     {
         //Загружаем обновленный список процессов. Снимок процессов на текущий момент после обновления.
-        private List<Process> processes = null;
+        private List<Process> _processes = null;
         //Экземпляр списка для сортировки.
         private ListViewItemComparer comparer = null;
 
         public Form1()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
         }
         //Заполнение списка(работает только с бэкендом,не взаим. с интерфейсом)
         private void GetProcesses() 
         {
-            processes.Clear();
-            processes = Process.GetProcesses().ToList<Process>();
+            _processes.Clear();
+            _processes = Process.GetProcesses().ToList<Process>();
         }
         //Уже взаим. с интерфейсом
-        private void RefreshProcessesList() 
+
+        string BasetPriorityToPriortyString(int basePriority)
         {
-            double memSize = 0;
+            switch (basePriority)
+            {
+                case 0:
+                    return "Системный";
+                case 4:
+                    return "Низкий";
+                case 6:
+                    return "Ниже среднего";
+                case 8:
+                    return "Нормальный";
+                case 9:
+                    return "Обычный";
+                case 10:
+                    return "Выше среднего";
+                case 13:
+                    return "Высокий";
+                case 24:
+                    return "Реального времени";
+                default:
+                    return "Неизветно";
+            }
+        }
+
+        CancellationTokenSource cancellation = null;
+
+        async Task LoadMem(Process process, ListViewItem item, CancellationToken cancellation = default)
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    PerformanceCounter pc = new PerformanceCounter("Process", "Working Set - Private", process.ProcessName);
+                    double memSize = 0;
+                    if (!cancellation.IsCancellationRequested)
+                        memSize = (double)pc.NextValue() / 1024;
+
+                    if (!cancellation.IsCancellationRequested)
+                        item.SubItems[1] = new ListViewItem.ListViewSubItem(item, Math.Round(memSize, 1).ToString() + " К");
+                    pc.Close();
+                }
+                catch { }
+            });
+        }
+
+
+        private void RefreshProcessesList()
+        {
+            cancellation?.Cancel();
+            cancellation = new CancellationTokenSource();
+
+            toolStripButton1.Enabled = false;
 
             listView1.Items.Clear();
 
-            foreach (Process p in processes) 
+            var processes = new List<ListViewItem>();
+
+            foreach (Process p in _processes)
             {
-                memSize = 0;     
-                PerformanceCounter pc = new PerformanceCounter();
-                
-                pc.CategoryName = "Process";
-                pc.CounterName = "Working Set - Private";
-                pc.InstanceName = p.ProcessName;
 
-                memSize = (double)pc.NextValue() / (1000 * 1000);
                 //Массив строк в колонки
-                string[] row = new string[] { p.ProcessName.ToString(), Math.Round(memSize, 1).ToString(), p.Id.ToString(), p.BasePriority.ToString(), p.PriorityClass.ToString(), p.PriorityClass.ToString()};
 
-                listView1.Items.Add(new ListViewItem(row));
+                string[] row = new string[] { p.ProcessName.ToString(), "...", p.Id.ToString(), p.BasePriority.ToString(), p.ProcessName.ToString(), BasetPriorityToPriortyString(p.BasePriority) };
 
-                pc.Close();
-                pc.Dispose();
+                var item = new ListViewItem(row);
+
+                var loadMemTask = LoadMem(p, item,  cancellation.Token);
+
+                processes.Add(item);
+
+
+                //   pc.Dispose();
             }
+
+            toolStripButton1.Enabled = true;
+
+            listView1.Items.AddRange(processes.ToArray());
+
             Text = "Запущено процессов: " + processes.Count.ToString();
-               
+
         }
 
         //Перегрузка метода(т.к. есть поле с фильтром для поиска по имени)
@@ -147,7 +211,7 @@ namespace TaskManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            processes = new List<Process>();
+            _processes = new List<Process>();
 
             GetProcesses();
 
@@ -171,7 +235,7 @@ namespace TaskManager
                 if (listView1.SelectedItems[0] != null) 
                 {
                     //Сравниваем имя каждого процесса с текстом в крайней колонке
-                    Process processToKill = processes.Where((x) => x.ProcessName ==
+                    Process processToKill = _processes.Where((x) => x.ProcessName ==
                     listView1.SelectedItems[0].SubItems[0].Text).ToList()[0];
 
                     KillProcess(processToKill);
@@ -191,7 +255,7 @@ namespace TaskManager
             {
                 if (listView1.SelectedItems[0] != null)
                 {
-                    Process processToKill = processes.Where((x) => x.ProcessName ==
+                    Process processToKill = _processes.Where((x) => x.ProcessName ==
                     listView1.SelectedItems[0].SubItems[0].Text).ToList()[0];
 
                     KillProcessAndChildren(GetParentProcessId(processToKill));
@@ -210,7 +274,7 @@ namespace TaskManager
             {
                 if (listView1.SelectedItems[0] != null)
                 {
-                    Process processToKill = processes.Where((x) => x.ProcessName ==
+                    Process processToKill = _processes.Where((x) => x.ProcessName ==
                     listView1.SelectedItems[0].SubItems[0].Text).ToList()[0];
 
                     KillProcessAndChildren(GetParentProcessId(processToKill));
@@ -241,7 +305,7 @@ namespace TaskManager
         {
             GetProcesses();
 
-            List<Process> filteredprocesses = processes.Where((x) => 
+            List<Process> filteredprocesses = _processes.Where((x) => 
             x.ProcessName.ToLower().Contains(toolStripTextBox1.Text.ToLower())).ToList <Process>();
 
             RefreshProcessesList(filteredprocesses, toolStripTextBox1.Text);
