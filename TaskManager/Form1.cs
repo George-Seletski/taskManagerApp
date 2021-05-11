@@ -48,7 +48,7 @@ namespace TaskManager
 
                 memSize = (double)pc.NextValue() / (1000 * 1000);
                 //Массив строк в колонки
-                string[] row = new string[] { p.ProcessName.ToString(), Math.Round(memSize, 1).ToString(), p.Id.ToString(), p.BasePriority.ToString(), p.PriorityClass.ToString(), p.PriorityClass.ToString()};
+                string[] row = new string[] { p.ProcessName.ToString(), Math.Round(memSize, 1).ToString(), p.Id.ToString(), p.BasePriority.ToString(), p.ProcessName.ToString()};
 
                 listView1.Items.Add(new ListViewItem(row));
 
