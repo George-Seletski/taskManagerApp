@@ -51,6 +51,7 @@ namespace TaskManager
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.завершитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.завершитьДеревоПроцессовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -167,7 +168,8 @@ namespace TaskManager
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
-            this.prName});
+            this.prName,
+            this.columnHeader5});
             this.listView1.ContextMenuStrip = this.contextMenuStrip1;
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.FullRowSelect = true;
@@ -226,6 +228,10 @@ namespace TaskManager
             this.завершитьДеревоПроцессовToolStripMenuItem.Text = "Завершить дерево процессов";
             this.завершитьДеревоПроцессовToolStripMenuItem.Click += new System.EventHandler(this.завершитьДеревоПроцессовToolStripMenuItem_Click);
             // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "ClassPriority";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -275,6 +281,7 @@ namespace TaskManager
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader prName;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
     }
 }
 
