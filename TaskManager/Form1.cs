@@ -67,6 +67,8 @@ namespace TaskManager
 
         CancellationTokenSource cancellation = null;
 
+        private int _loadMemCount = 0;
+
         async Task LoadMem(Process process, ListViewItem item, CancellationToken cancellation = default)
         {
             await Task.Factory.StartNew(() =>
@@ -80,15 +82,24 @@ namespace TaskManager
 
                     if (!cancellation.IsCancellationRequested)
                         item.SubItems[1] = new ListViewItem.ListViewSubItem(item, Math.Round(memSize, 1).ToString() + " К");
+
                     pc.Close();
                 }
                 catch { }
+
+                if (!cancellation.IsCancellationRequested)
+                {
+                    _loadMemCount++;
+                    if (listView1.Items.Count == _loadMemCount)
+                        toolStripButton1.Enabled = true;
+                }
             });
         }
 
 
         private void RefreshProcessesList()
         {
+            _loadMemCount = 0;
             cancellation?.Cancel();
             cancellation = new CancellationTokenSource();
 
@@ -114,8 +125,6 @@ namespace TaskManager
 
                 //   pc.Dispose();
             }
-
-            toolStripButton1.Enabled = true;
 
             listView1.Items.AddRange(processes.ToArray());
 
