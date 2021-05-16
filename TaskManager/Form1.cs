@@ -356,5 +356,22 @@ namespace TaskManager
         {
 
         }
+
+        //пример кода для каждого StripMenuItem
+        private void changePriority(string nameProc)
+        {
+            Process[] processes = Process.GetProcessesByName(nameProc);
+            foreach (Process proc in processes)
+            {
+                Console.WriteLine("Changing Priority for: " + proc.Id + " To RealTime");
+                proc.PriorityClass = ProcessPriorityClass.RealTime;
+
+                if (proc.PriorityClass == ProcessPriorityClass.RealTime)
+                {
+                    Console.WriteLine("Worked");
+                }
+            }
+            Console.ReadLine();
+        }
     }
 }
