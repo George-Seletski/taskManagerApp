@@ -114,7 +114,7 @@ namespace TaskManager
 
                 //Массив строк в колонки
 
-                string[] row = new string[] { p.ProcessName.ToString(), "...", p.Id.ToString(), p.BasePriority.ToString(), p.ProcessName.ToString(), BasetPriorityToPriortyString(p.BasePriority) };
+                string[] row = new string[] { p.ProcessName.ToString(), "...", p.Id.ToString(), p.BasePriority.ToString(), BasetPriorityToPriortyString(p.BasePriority) };
 
                 var item = new ListViewItem(row);
 
@@ -334,6 +334,27 @@ namespace TaskManager
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void нориальныйToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void высокийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void низкийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

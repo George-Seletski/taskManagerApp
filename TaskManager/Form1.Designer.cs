@@ -47,11 +47,14 @@ namespace TaskManager
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.prName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.завершитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.завершитьДеревоПроцессовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.нориальныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.нормальныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.высокийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.низкийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -69,6 +72,7 @@ namespace TaskManager
             this.menuStrip1.Size = new System.Drawing.Size(1239, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // файлToolStripMenuItem
             // 
@@ -168,7 +172,6 @@ namespace TaskManager
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
-            this.prName,
             this.columnHeader5});
             this.listView1.ContextMenuStrip = this.contextMenuStrip1;
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -204,11 +207,6 @@ namespace TaskManager
             this.columnHeader4.Text = "Приоритет";
             this.columnHeader4.Width = 127;
             // 
-            // prName
-            // 
-            this.prName.Text = "Имя Процесса";
-            this.prName.Width = 142;
-            // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "ClassPriority";
@@ -219,9 +217,10 @@ namespace TaskManager
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.завершитьToolStripMenuItem,
-            this.завершитьДеревоПроцессовToolStripMenuItem});
+            this.завершитьДеревоПроцессовToolStripMenuItem,
+            this.нориальныйToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(333, 68);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(333, 133);
             // 
             // завершитьToolStripMenuItem
             // 
@@ -235,6 +234,37 @@ namespace TaskManager
             this.завершитьДеревоПроцессовToolStripMenuItem.Size = new System.Drawing.Size(332, 32);
             this.завершитьДеревоПроцессовToolStripMenuItem.Text = "Завершить дерево процессов";
             this.завершитьДеревоПроцессовToolStripMenuItem.Click += new System.EventHandler(this.завершитьДеревоПроцессовToolStripMenuItem_Click);
+            // 
+            // нориальныйToolStripMenuItem
+            // 
+            this.нориальныйToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.нормальныйToolStripMenuItem,
+            this.высокийToolStripMenuItem,
+            this.низкийToolStripMenuItem});
+            this.нориальныйToolStripMenuItem.Name = "нориальныйToolStripMenuItem";
+            this.нориальныйToolStripMenuItem.Size = new System.Drawing.Size(332, 32);
+            this.нориальныйToolStripMenuItem.Text = "Изменить приоритет ";
+            this.нориальныйToolStripMenuItem.Click += new System.EventHandler(this.нориальныйToolStripMenuItem_Click);
+            // 
+            // нормальныйToolStripMenuItem
+            // 
+            this.нормальныйToolStripMenuItem.Name = "нормальныйToolStripMenuItem";
+            this.нормальныйToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.нормальныйToolStripMenuItem.Text = "Нормальный";
+            // 
+            // высокийToolStripMenuItem
+            // 
+            this.высокийToolStripMenuItem.Name = "высокийToolStripMenuItem";
+            this.высокийToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.высокийToolStripMenuItem.Text = "Высокий";
+            this.высокийToolStripMenuItem.Click += new System.EventHandler(this.высокийToolStripMenuItem_Click);
+            // 
+            // низкийToolStripMenuItem
+            // 
+            this.низкийToolStripMenuItem.Name = "низкийToolStripMenuItem";
+            this.низкийToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.низкийToolStripMenuItem.Text = "Низкий";
+            this.низкийToolStripMenuItem.Click += new System.EventHandler(this.низкийToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -284,8 +314,11 @@ namespace TaskManager
         private System.Windows.Forms.ToolStripMenuItem запуститьЗадачуToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader prName;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ToolStripMenuItem нориальныйToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem нормальныйToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem высокийToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem низкийToolStripMenuItem;
     }
 }
 
