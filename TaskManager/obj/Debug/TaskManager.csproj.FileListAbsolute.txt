@@ -1,13 +1,3 @@
-C:\Users\GEO\Desktop\C#_TREADS\TaskManager\TaskManager\bin\Debug\TaskManager.exe.config
-C:\Users\GEO\Desktop\C#_TREADS\TaskManager\TaskManager\bin\Debug\TaskManager.exe
-C:\Users\GEO\Desktop\C#_TREADS\TaskManager\TaskManager\bin\Debug\TaskManager.pdb
-C:\Users\GEO\Desktop\C#_TREADS\TaskManager\TaskManager\obj\Debug\TaskManager.csprojAssemblyReference.cache
-C:\Users\GEO\Desktop\C#_TREADS\TaskManager\TaskManager\obj\Debug\TaskManager.Form1.resources
-C:\Users\GEO\Desktop\C#_TREADS\TaskManager\TaskManager\obj\Debug\TaskManager.Properties.Resources.resources
-C:\Users\GEO\Desktop\C#_TREADS\TaskManager\TaskManager\obj\Debug\TaskManager.csproj.GenerateResource.cache
-C:\Users\GEO\Desktop\C#_TREADS\TaskManager\TaskManager\obj\Debug\TaskManager.csproj.CoreCompileInputs.cache
-C:\Users\GEO\Desktop\C#_TREADS\TaskManager\TaskManager\obj\Debug\TaskManager.exe
-C:\Users\GEO\Desktop\C#_TREADS\TaskManager\TaskManager\obj\Debug\TaskManager.pdb
 C:\Users\Andrei\source\repos\taskManagerApp\TaskManager\bin\Debug\TaskManager.exe.config
 C:\Users\Andrei\source\repos\taskManagerApp\TaskManager\bin\Debug\TaskManager.exe
 C:\Users\Andrei\source\repos\taskManagerApp\TaskManager\bin\Debug\TaskManager.pdb

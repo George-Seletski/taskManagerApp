@@ -347,31 +347,44 @@ namespace TaskManager
 
         }
 
-        private void высокийToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void низкийToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         //пример кода для каждого StripMenuItem
-        private void changePriority(string nameProc)
+        private void changePriority(int idProc, ProcessPriorityClass processPriority)
         {
-            Process[] processes = Process.GetProcessesByName(nameProc);
-            foreach (Process proc in processes)
-            {
-                Console.WriteLine("Changing Priority for: " + proc.Id + " To RealTime");
-                proc.PriorityClass = ProcessPriorityClass.RealTime;
+            Process processes = Process.GetProcessById(idProc);
+            Console.WriteLine("Changing Priority for: " + processes.Id + " To RealTime");
+            processes.PriorityClass = processPriority;
 
-                if (proc.PriorityClass == ProcessPriorityClass.RealTime)
-                {
-                    Console.WriteLine("Worked");
-                }
+            if (processes.PriorityClass == processPriority)
+            {
+                Console.WriteLine("Worked");
             }
-            Console.ReadLine();
+        }
+
+        private ListViewItem _selectedItem { get; set; }
+
+        private void listView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            _selectedItem = e.Item;
+        }
+
+        private void нориальныйToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            int id = int.Parse(_selectedItem.SubItems[2].Text);
+            if (e.ClickedItem.Text == "Нормальный") 
+            {
+                changePriority(id, ProcessPriorityClass.Normal);
+                _selectedItem.SubItems[4].Text = "Нормальный";
+            }
+            else if (e.ClickedItem.Text == "Высокий")
+            {
+                changePriority(id, ProcessPriorityClass.High);
+                _selectedItem.SubItems[4].Text = "Высокий";
+            }
+            else if (e.ClickedItem.Text == "Низкий")
+            {
+                changePriority(id, ProcessPriorityClass.Idle);
+                _selectedItem.SubItems[4].Text = "Низкий";
+            }
         }
     }
 }
