@@ -75,7 +75,7 @@ namespace TaskManager
             {
                 try
                 {
-                    PerformanceCounter pc = new PerformanceCounter("Process", "Working Set - Private", process.ProcessName);
+                    PerformanceCounter pc = new PerformanceCounter("Process", "Working Set - Private", process.ProcessName.ToString());
                     double memSize = 0;
                     if (!cancellation.IsCancellationRequested)
                         memSize = (double)pc.NextValue() / 1024;
